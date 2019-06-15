@@ -29,7 +29,7 @@ setup(
     install_requires  =  [
         "rjsmin",
     ],
-    classifiers=[https://github.com/maxbachmann/lektor-JSminify
+    classifiers=[
         "Development Status :: 5 - Production/Stable",
         'Framework :: Lektor',
         "Environment :: Plugins",
