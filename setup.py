@@ -24,12 +24,12 @@ setup(
     name='lektor-jsminify',
     packages=find_packages(),
     py_modules=['lektor_jsminify'],
-    # url='[link to your repository]',
-    version='0.1',
+    url='https://github.com/maxbachmann/lektor-JSminify',
+    version='0.2',
     install_requires  =  [
         "rjsmin",
     ],
-    classifiers=[
+    classifiers=[https://github.com/maxbachmann/lektor-JSminify
         "Development Status :: 5 - Production/Stable",
         'Framework :: Lektor',
         "Environment :: Plugins",
