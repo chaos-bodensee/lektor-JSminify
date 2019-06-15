@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import errno
 
 import rjsmin
 from lektor.pluginsystem import Plugin
@@ -35,6 +36,14 @@ class JsminifyPlugin(Plugin):
         with open(output_file, 'w') as fw:
             fw.write(result)
 
+    def make_sure_path_exists(path):
+        # os.makedirs(path,exist_ok=True) in python3
+        try:
+            os.makedirs(path)
+        except OSError as exception:
+            if exception.errno != errno.EEXIST:
+                raise
+
     def find_js_files(self, destination):
         """
         Finds all js files in the given destination.
@@ -54,8 +63,11 @@ class JsminifyPlugin(Plugin):
         if not is_enabled:
             return
         
-        root = os.path.join(self.env.root_path, 'asset_sources/js/')
+        root = os.path.join(self.env.root_path, 'asset_sources/js/')make_sure_path_exists
         output = os.path.join(self.env.root_path, 'assets/js/')
+
+        # output path has to exist
+        make_sure_path_exists(output)
 
         for jsfile in self.find_js_files(root):
             self.minify_file(jsfile, output)
