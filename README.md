@@ -31,3 +31,15 @@ lektor build -f jsminify
 When the flag is present, jsminify will take all .js files from asset_sources/js, minifies them and places them
 in assets/js.
 
+
+The Plugin has the following settings you can adjust to your needs:
+
+|parameter      |default value      |description                                                                                       |
+|---------------|-------------------|--------------------------------------------------------------------------------------------------|
+|source_dir     |asset_sources/scss/| the directory in which the plugin searchs for sass files (subdirectories are included)           |
+|output_dir     |assets/css/        | the directory the compiled css files get place at                                                |
+|output_style   |compressed         | coding style of the compiled result. choose one of: 'nested', 'expanded', 'compact', 'compressed'|
+|source_comments|False              | whether to add comments about source lines                                                       |
+|precision      |5                  | precision for numbers                                                                            |
+
+An example file with the default config can be found at `configs/jscompile.ini`
