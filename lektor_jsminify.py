@@ -38,6 +38,10 @@ class JsminifyPlugin(Plugin):
         if not output_file.endswith(file_end):
             output_file = output_file.replace('.js', file_end)
 
+        # do not override files
+        if (output_file == target)
+            return
+        
         # check if file has been changed after output file ()
         if (os.path.isfile(output_file) and os.path.getmtime(target) <= os.path.getmtime(output_file)):
             return
