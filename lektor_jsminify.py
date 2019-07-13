@@ -48,8 +48,6 @@ class JsminifyPlugin(Plugin):
         """
         Minifies the target js file.
         """
-        #if (re.match(self.exclude, target) and not re.match(self.include, target)):
-        #    return
 
         filename = os.path.basename(target)
         output_file = os.path.join(output, filename)
