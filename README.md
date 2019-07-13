@@ -34,11 +34,13 @@ in assets/js.
 
 The Plugin has the following settings you can adjust to your needs:
 
-|parameter      |default value      |description                                                                                       |
-|---------------|-------------------|--------------------------------------------------------------------------------------------------|
-|source_dir     |asset_sources/js/| the directory in which the plugin searchs for js files (subdirectories are included)           |
-|output_dir     |assets/js/        | the directory the minified js files get place at                                                |
-|name_prefix      |                  | prefix for output name e.g. test.scss gets to test<name_prefix>.css                                                                         |
-|keep_bang_comments|False              | keep comments starting with an exclamation mark                                                     |
+|parameter         |default value      |description                                                                                       |
+|------------------|-------------------|--------------------------------------------------------------------------------------------------|
+|source_dir        |asset_sources/js/  | the directory in which the plugin searchs for js files (subdirectories are included)             |
+|output_dir        |assets/js/         | the directory the minified js files get place at                                                 |
+|name_prefix       |                   | prefix for output name e.g. test.scss gets to test<name_prefix>.css                              |
+|keep_bang_comments|False              | keep comments starting with an exclamation mark                                                  |
+|excluded_assets   |                   | exclude .js files using unix shell style wildcards (fnmatch)                                     |
+|included_assets   |                   | include .js files using unix shell style wildcards (fnmatch) overrides excluded assets           |
 
 An example file with the default config can be found at `configs/jscompile.ini`

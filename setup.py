@@ -25,7 +25,7 @@ setup(
     packages=find_packages(),
     py_modules=['lektor_jsminify'],
     url='https://github.com/maxbachmann/lektor-JSminify',
-    version='1.2',
+    version='1.3',
     install_requires  =  [
         "rjsmin", "termcolor",
     ],

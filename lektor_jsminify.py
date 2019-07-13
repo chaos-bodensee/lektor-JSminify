@@ -2,12 +2,21 @@
 import os
 import errno
 import re
+import fnmatch
 
 import rjsmin
 from lektor.pluginsystem import Plugin
+from lektor.utils import comma_delimited
 from termcolor import colored
 
 MINIFY_FLAG = "jsminify"
+
+def any_fnmatch(filename, patterns):
+    for pat in patterns:
+        if fnmatch.fnmatch(filename, pat):
+            return True
+
+    return False
 
 class JsminifyPlugin(Plugin):
     name = u'Lektor JSminify'
@@ -20,9 +29,19 @@ class JsminifyPlugin(Plugin):
         self.output_dir = config.get('output_dir', 'assets/js/')
         self.name_prefix = config.get('name_prefix', '')
         self.keep_bang_comments = config.get('keep_bang_comments', 'False')
+        self.included_assets = list(comma_delimited(config.get('included_assets', '')))
+        self.excluded_assets = list(comma_delimited(config.get('excluded_assets', '')))
 
     def is_enabled(self, build_flags):
         return bool(build_flags.get(MINIFY_FLAG))
+
+
+    def is_uninteresting_source_name(self, filename):
+        """These files are ignored when sources are built into artifacts."""
+        if any_fnmatch(filename, self.included_assets):
+            # Included by the user's project config, thus not uninteresting.
+            return False
+        return any_fnmatch(filename, self.excluded_assets)
 
 # .*\.min\.js
     def minify_file(self, target, output):
@@ -37,9 +56,8 @@ class JsminifyPlugin(Plugin):
         file_end = self.name_prefix + '.js'
         if not output_file.endswith(file_end):
             output_file = output_file.replace('.js', file_end)
-
         # do not override files
-        if (output_file == target)
+        if (self.is_uninteresting_source_name(target)):
             return
         
         # check if file has been changed after output file ()
@@ -83,15 +101,12 @@ class JsminifyPlugin(Plugin):
 
         if not is_enabled:
             return
-        
+
         root_js = os.path.join(self.env.root_path, self.source_dir )
         output = os.path.join(self.env.root_path, self.output_dir )
 
         # output path has to exist
         self.make_sure_path_exists(output)
 
-        jsfiles = self.find_js_files(root_js)
-        @ctx.sub_artifact('js-files', sources=[jsfiles])
-
-        for jsfile in jsfiles:
+        for jsfile in self.find_js_files(root_js):
             self.minify_file(jsfile, output)
