@@ -43,4 +43,4 @@ The Plugin has the following settings you can adjust to your needs:
 |excluded_assets   |                   | exclude .js files using a comma separated list of unix shell style wildcards ([fnmatch](https://docs.python.org/3/library/fnmatch.html))                                     |
 |included_assets   |                   | include .js files using a comma separated list of unix shell style wildcards ([fnmatch](https://docs.python.org/3/library/fnmatch.html)) overrides excluded assets           |
 
-An example file with the default config can be found at `configs/jscompile.ini`
+An example config can be found at `configs/jscompile.ini`
