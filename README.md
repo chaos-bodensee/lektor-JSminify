@@ -1,5 +1,5 @@
 # lektor-JSminify
-[![PyPI version](https://badge.fury.io/py/lektor-jsminify.svg)](https://badge.fury.io/py/lektor-jsminify)
+[![PyPI version](https://badge.fury.io/py/lektor-jsminify.svg)](https://badge.fury.io/py/lektor-jsminify) [![Downloads](https://pepy.tech/badge/lektor-jsminify)](https://pepy.tech/project/lektor-jsminify)
 
 JS minifier for Lektor that automatically minifies javascript files
 
