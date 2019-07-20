@@ -4,7 +4,7 @@
 JS minifier for Lektor that automatically minifies javascript files
 
 Uses [rjsmin](https://pypi.org/project/rjsmin/)  and looks for .js files,
-minifying them as part of the build process.
+minifying them as part of the build process. It only rebuilds when it's needed (file changed or the config changed). When starting the the development server it watchs the files for changes in the background and rebuilds them when needed.
 
 ## Installing
 
@@ -16,14 +16,17 @@ lektor plugins add lektor-jsminify
 Or by hand, adding the plugin to the packages section in your lektorproject file::
 ```bash
 [packages]
-lektor-jsminify = 1.3
+lektor-jsminify = 1.4
 ```
 
 ## Usage
 #####
 
 To enable jsminify, pass the `jsminify` flag when starting the development
-server or when running a build::
+server or when running a build:
+```bash
+lektor server -f jsminify
+```
 ```bash
 lektor build -f jsminify
 ```
