@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # make print compatible with python2
 from __future__ import print_function
 import os

@@ -16,7 +16,7 @@ lektor plugins add lektor-jsminify
 Or by hand, adding the plugin to the packages section in your lektorproject file::
 ```bash
 [packages]
-lektor-jsminify = 1.4
+lektor-jsminify = 1.4.1
 ```
 
 ## Usage
