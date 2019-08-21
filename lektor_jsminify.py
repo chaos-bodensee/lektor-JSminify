@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# make print compatible with python2
+from __future__ import print_function
 import os
 import errno
 import re
@@ -37,10 +39,10 @@ class JsminifyPlugin(Plugin):
         self.watcher = None
         self.run_watcher = False
 
-    def is_enabled(self, build_flags) -> bool:
+    def is_enabled(self, build_flags):
         return bool(build_flags.get(MINIFY_FLAG))
 
-    def is_uninteresting_source_name(self, filename) -> bool:
+    def is_uninteresting_source_name(self, filename):
         """These files are ignored when sources are built into artifacts."""
         if any_fnmatch(filename, self.included_assets):
             # Included by the user's project config, thus not uninteresting.
@@ -109,6 +111,13 @@ class JsminifyPlugin(Plugin):
         if self.watcher is not None:
             self.run_watcher = False
 
+    def make_sure_path_exists(self, path):
+        try:
+            os.makedirs(path)
+        except OSError as exception:
+            if exception.errno != errno.EEXIST:
+                raise            
+
     def on_before_build_all(self, builder, **extra):
         try: # lektor 3+
             is_enabled = self.is_enabled(builder.extra_flags)
@@ -122,7 +131,8 @@ class JsminifyPlugin(Plugin):
         output = os.path.join(self.env.root_path, self.output_dir )
 
         # output path has to exist
-        os.makedirs(output, exist_ok=True)
+        #os.makedirs(output, exist_ok=True) when python2 finally runs out
+        self.make_sure_path_exists(output)
 
         if self.run_watcher:
             filenames = self.find_source_files(root_js)
